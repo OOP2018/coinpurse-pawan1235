@@ -109,23 +109,25 @@ public class Purse {
 		MoneyUtil.sortCoins(this.money);
 		if (amount != 0) {
 			if (amount <= this.getBalance()) {
-				for (int i = 0; i < this.money.size(); i++) {
-					if (amount >= this.money.get(i).getValue()) {
-						amount -= this.money.get(i).getValue();
-						temp.add(this.money.get(i));
+				for (Coin coin : this.money) {
+					if (amount >= coin.getValue()) {
+						amount -= coin.getValue();
+						temp.add(coin);
 					}
 				}
-
+				if (amount == 0) {
+					for (Coin coin : temp) {
+						this.money.remove(coin);
+					}
+				} else {
+					return null;
+				}
+				Coin[] coins = new Coin[temp.size()];
+				temp.toArray(coins);
+				return coins;
 			}
-
 		}
-
-		// Success.
-		// Remove the coins you want to withdraw from purse,
-		// and return them as an array.
-		// Use list.toArray( array[] ) to copy a list into an array.
-		// toArray returns a reference to the array itself.
-		return new Coin[0]; // TODO replace this with real code
+		return null;
 	}
 
 	/**
