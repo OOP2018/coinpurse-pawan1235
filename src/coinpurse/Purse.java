@@ -7,7 +7,7 @@ import java.util.List;
  * A coin purse contains coins. You can insert coins, withdraw money, check the
  * balance, and check if the purse is full.
  * 
- * @author your name
+ * @author Pawan Intawongsa
  */
 public class Purse {
 	/** Collection of objects in the purse. */
