@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Class that contain a useful method for List of Coin it can return List of
- * coin that all same currency, Sort list of Coin
+ * coin that all same currency, Sort list of Coin.
  * 
  * @author Pawan Intawongsa
  *
@@ -34,13 +34,24 @@ public class MoneyUtil {
 
 	/**
 	 * Sort a list of coins and print the result on the console. Write a separate
-	 * method to print the list
+	 * method to print the list.
 	 * 
 	 * @param coins
 	 *            is List of coin to be sort
 	 */
 	public static void sortCoins(List<Coin> coins) {
 		java.util.Collections.sort(coins);
+	}
+	
+	/**
+	 * Print all coin description in List of coin in parameter.
+	 * @param coins
+	 * 				is List of coin we want to print
+	 */
+	public static void printCoins(List<Coin> coins) {
+		for (Coin coin : coins) {
+			System.out.println(coin.getValue() + "-" + coin.getCurrency());
+		}
 	}
 
 }
