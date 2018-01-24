@@ -1,6 +1,7 @@
 package coinpurse;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * 
  * @author Pawan Intawongsa
  */
-public class Purse {
+public class Purse{
 	/** Collection of objects in the purse. */
 	private List<Coin> money = new ArrayList<Coin>();
 
@@ -107,6 +108,7 @@ public class Purse {
 	public Coin[] withdraw(double amount) {
 		List<Coin> temp = new ArrayList<Coin>();
 		MoneyUtil.sortCoins(this.money);
+		Collections.reverse(this.money);
 		if (amount != 0) {
 			if (amount <= this.getBalance()) {
 				for (Coin coin : this.money) {
