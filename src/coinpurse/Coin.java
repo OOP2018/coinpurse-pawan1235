@@ -70,9 +70,9 @@ public class Coin implements Comparable<Coin> {
 	 */
 	public int compareTo(Coin coin) {
 		if (this.getValue() < coin.getValue())
-			return 1;
-		if (this.getValue() > coin.getValue())
 			return -1;
+		if (this.getValue() > coin.getValue())
+			return 1;
 		return 0;
 	}
 
