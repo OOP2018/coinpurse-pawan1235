@@ -1,6 +1,7 @@
 package coinpurse;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -36,21 +37,21 @@ public class MoneyUtil {
 	 * Sort a list of coins and print the result on the console. Write a separate
 	 * method to print the list.
 	 * 
-	 * @param coins
+	 * @param vals
 	 *            is List of coin to be sort
 	 */
-	public static void sortCoins(List<Coin> coins) {
-		java.util.Collections.sort(coins);
+	public static void sortCoins(List<Valuable> vals) {
+		Collections.sort(vals);;
 	}
 	
 	/**
 	 * Print all coin description in List of coin in parameter.
-	 * @param coins
+	 * @param vals
 	 * 				is List of coin we want to print
 	 */
-	public static void printCoins(List<Coin> coins) {
-		for (Coin coin : coins) {
-			System.out.println(coin.getValue() + "-" + coin.getCurrency());
+	public static void printCoins(List<Valuable> vals) {
+		for (Valuable val : vals) {
+			System.out.println(val.getValue() + "-" + val.getCurrency());
 		}
 	}
 

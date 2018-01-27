@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Purse{
 	/** Collection of objects in the purse. */
-	private List<Coin> money = new ArrayList<Coin>();
+	private List<Valuable> money = new ArrayList<Valuable>();
 
 	/**
 	 * Capacity is maximum number of items the purse can hold. Capacity is set when
@@ -47,8 +47,8 @@ public class Purse{
 	 */
 	public double getBalance() {
 		double sum = 0;
-		for (Coin coin : this.money) {
-			sum += coin.getValue();
+		for (Valuable val : this.money) {
+			sum += val.getValue();
 		}
 		return sum;
 	}
@@ -79,18 +79,18 @@ public class Purse{
 	 * Insert a coin into the purse. The coin is only inserted if the purse has
 	 * space for it and the coin has positive value. No worthless coins!
 	 * 
-	 * @param coin
+	 * @param val
 	 *            is a Coin object to insert into purse
 	 * @return true if coin inserted, false if can't insert
 	 */
-	public boolean insert(Coin coin) {
+	public boolean insert(Valuable val) {
 		if (this.isFull()) {
 			return false;
 		} else {
-			if (coin.getValue() <= 0) {
+			if (val.getValue() <= 0) {
 				return false;
 			} else {
-				this.money.add(coin);
+				this.money.add(val);
 				return true;
 			}
 		}
@@ -105,28 +105,28 @@ public class Purse{
 	 * @return array of Coin objects for money withdrawn, or null if cannot withdraw
 	 *         requested amount.
 	 */
-	public Coin[] withdraw(double amount) {
-		List<Coin> temp = new ArrayList<Coin>();
-		MoneyUtil.sortCoins(this.money);
+	public Valuable[] withdraw(double amount) {
+		List<Valuable> temp = new ArrayList<Valuable>();
+		Collections.sort(this.money);
 		Collections.reverse(this.money);
 		if (amount != 0) {
 			if (amount <= this.getBalance()) {
-				for (Coin coin : this.money) {
-					if (amount >= coin.getValue()) {
-						amount -= coin.getValue();
-						temp.add(coin);
+				for (Valuable val : this.money) {
+					if (amount >= val.getValue()) {
+						amount -= val.getValue();
+						temp.add(val);
 					}
 				}
 				if (amount == 0) {
-					for (Coin coin : temp) {
-						this.money.remove(coin);
+					for (Valuable val : temp) {
+						this.money.remove(val);
 					}
 				} else {
 					return null;
 				}
-				Coin[] coins = new Coin[temp.size()];
-				temp.toArray(coins);
-				return coins;
+				Valuable[] vals = new Valuable[temp.size()];
+				temp.toArray(vals);
+				return vals;
 			}
 		}
 		return null;
