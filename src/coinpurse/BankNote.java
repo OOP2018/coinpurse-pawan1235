@@ -10,10 +10,12 @@ package coinpurse;
 public class BankNote implements Valuable {
 	/** value of bank note*/
 	private double value;
-	/** Unique serial number of bank note */
+	/** Next unique serial number of bank note */
 	private static long nextSerialNumber = 1000000;
 	/** Currency of bank note*/
 	private String currency;
+	/** unique serial number of bank note */
+	private long serialNumber;
 	
 	
     /**
@@ -27,7 +29,7 @@ public class BankNote implements Valuable {
 	public BankNote(double value, String currency) {
 		this.value = value;
 		this.currency = currency;
-		BankNote.nextSerialNumber++;
+		this.serialNumber = nextSerialNumber++;
 	}
 	
 	/**

@@ -2,6 +2,7 @@ package coinpurse;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  * 
  * @author Pawan Intawongsa
  */
-public class Purse{
+public class Purse {
 	/** Collection of objects in the purse. */
 	private List<Valuable> money = new ArrayList<Valuable>();
 
@@ -19,6 +20,12 @@ public class Purse{
 	 * the purse is created and cannot be changed.
 	 */
 	private final int capacity;
+
+	/**
+	 * Comparator if first object has the same currency it will compare by value
+	 * else it will compare by alphabet order.
+	 */
+	private Comparator<Valuable> comp = new ValueComparator();
 
 	/**
 	 * Create a purse with a specified capacity.
@@ -107,7 +114,7 @@ public class Purse{
 	 */
 	public Valuable[] withdraw(double amount) {
 		List<Valuable> temp = new ArrayList<Valuable>();
-		Collections.sort(this.money);
+		Collections.sort(this.money, comp);
 		Collections.reverse(this.money);
 		if (amount != 0) {
 			if (amount <= this.getBalance()) {

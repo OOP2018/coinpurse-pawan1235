@@ -90,10 +90,10 @@ public class Coin implements Valuable {
 	 * Compare between 2 Valuable
 	 */
 	@Override
-	public int compareTo(Valuable coin) {
-		if (this.value < coin.getValue()) {
+	public int compareTo(Valuable val) {
+		if (this.value < val.getValue()) {
 			return -1;
-		} else if (this.value > coin.getValue()) {
+		} else if (this.value > val.getValue()) {
 			return 1;
 		} else {
 			return 0;
