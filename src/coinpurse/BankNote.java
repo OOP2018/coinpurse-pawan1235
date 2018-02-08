@@ -50,12 +50,12 @@ public class BankNote implements Valuable {
 	}
 	
 	/**
-	 * Get unique serial number of bank note
+	 * Return serial number of bank note
 	 * 
-	 * @return unique serial number of bank note
+	 * @return serial number of bank note
 	 */
-	public static long getNextSerialNumber() {
-		return nextSerialNumber;
+	public long getSerial() {
+		return this.serialNumber;
 	}
 	
 	/**
