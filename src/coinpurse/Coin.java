@@ -6,11 +6,7 @@ package coinpurse;
  * @author Pawan Intawongsa
  *
  */
-public class Coin implements Valuable {
-	/** value of coin */
-	private double value;
-	/** currency of coin */
-	private String currency;
+public class Coin extends Money {
 
 	/**
 	 * Create a coin with value and currency.
@@ -21,59 +17,7 @@ public class Coin implements Valuable {
 	 *            is currency of coin
 	 */
 	public Coin(double value, String currency) {
-		this.value = value;
-		this.currency = currency;
-	}
-
-	/**
-	 * Get value of coin
-	 * 
-	 * @return value of coin
-	 */
-	public double getValue() {
-		return value;
-	}
-
-	/**
-	 * Get currency of coin
-	 * 
-	 * @return currency of coin
-	 */
-	public String getCurrency() {
-		return currency;
-	}
-
-	/**
-	 * Check 2 coins if its equal each other or not.
-	 * 
-	 * @param arg
-	 *            is an object to use to check if it equal coin.
-	 */
-	@Override
-	public boolean equals(Object arg) {
-		if (arg == null)
-			return false;
-		if (arg.getClass() != this.getClass())
-			return false;
-		Coin other = (Coin) arg;
-		if (this.getValue() == other.getValue() && this.getCurrency().equals(other.getCurrency())) {
-			return true;
-		} else
-			return false;
-	}
-
-	/**
-	 * Compare 2 coin if they are more or less or equal to each other.
-	 * 
-	 * @param coin
-	 *            is another coin to use to compare
-	 */
-	public int compareTo(Coin coin) {
-		if (this.getValue() < coin.getValue())
-			return -1;
-		if (this.getValue() > coin.getValue())
-			return 1;
-		return 0;
+		super(value, currency);
 	}
 
 	/**
@@ -83,20 +27,11 @@ public class Coin implements Valuable {
 	 */
 	@Override
 	public String toString() {
-		return this.value + "-" + this.currency;
+		return super.getValue() + "-" + super.getCurrency();
 	}
-	
-	/**
-	 * Compare between 2 Valuable
-	 */
-	@Override
-	public int compareTo(Valuable val) {
-		if (this.value < val.getValue()) {
-			return -1;
-		} else if (this.value > val.getValue()) {
-			return 1;
-		} else {
-			return 0;
-		}
+	public static void main(String[] args) {
+		Coin a = new Coin(5,"bath");
+		Coin b = new Coin(5,"rupi");
+		System.out.println(a.equals(b));
 	}
 }
