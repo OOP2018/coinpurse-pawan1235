@@ -46,7 +46,7 @@ public class PurseTest {
 		assertEquals(0, purse.count());
 	}
 
-	/** Insert some coins. Easy test. */
+	/** Insert some coins,banks. Easy test. */
 	@Test
 	public void testInsert() {
 		Purse purse = new Purse(6);
@@ -70,7 +70,7 @@ public class PurseTest {
 		assertFalse(purse.insert(makeCoin(1)));
 	}
 
-	/** Insert should reject coin with no value. */
+	/** Insert should reject coin,bank with no value. */
 	@Test
 	public void testInsertNoValue() {
 		Purse purse = new Purse(3);
@@ -99,7 +99,7 @@ public class PurseTest {
 	}
 
 	/**
-	 * Should be able to insert same coin many times, since spec doesn't say
+	 * Should be able to insert same coin,bank many times, since spec doesn't say
 	 * anything about this.
 	 */
 	@Test(timeout = 1000)
@@ -124,7 +124,7 @@ public class PurseTest {
 		assertEquals(purse.getBalance(), 150, TOL);
 	}
 
-	/** Add one coin and remove it. */
+	/** Add one coin,bank and remove it. */
 	@Test(timeout = 1000)
 	public void testEasyWithdraw() {
 		Purse purse = new Purse(10);
@@ -152,7 +152,9 @@ public class PurseTest {
 		}
 	}
 
-	/** Add 4 coins and then withdraw in pairs, but not in same order. */
+	/** Add 4 coins and then withdraw in pairs, but not in same order. 
+	 * and add 5 banks and then withdraw in pairs, but not same order.
+	 * */
 	@Test(timeout = 1000)
 	public void testMultiWithdraw() {
 		Purse purse = new Purse(10);
@@ -267,11 +269,11 @@ public class PurseTest {
 	}
 
 	/**
-	 * Sum the value of some coins.
+	 * Sum the value of some valuables.
 	 * 
 	 * @param wd1
-	 *            array of coins
-	 * @return sum of values of the coins
+	 *            array of valuables
+	 * @return sum of values of the valuables
 	 */
 	private double sum(Valuable[] wd1) {
 		if (wd1 == null)

@@ -29,9 +29,4 @@ public class Coin extends Money {
 	public String toString() {
 		return super.getValue() + "-" + super.getCurrency();
 	}
-	public static void main(String[] args) {
-		Coin a = new Coin(5,"bath");
-		Coin b = new Coin(5,"rupi");
-		System.out.println(a.equals(b));
-	}
 }

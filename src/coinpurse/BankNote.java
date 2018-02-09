@@ -45,10 +45,4 @@ public class BankNote extends Money {
 	public String toString() {
 		return String.format("%.2f-%s note [%d]", super.getValue(), super.getCurrency(), this.serialNumber);
 	}
-	public static void main(String[] args) {
-		BankNote n = new BankNote(50,"bath");
-		BankNote a = new BankNote(50, "bath");
-		System.out.println(n.equals(a));
-		System.out.println(n.compareTo(a));
-	}
 }
