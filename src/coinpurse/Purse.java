@@ -125,10 +125,9 @@ public class Purse {
 	 * @return array of Valuable objects for money withdraw
 	 */
 	public Valuable[] withdraw(Valuable amount) {
-		List<Valuable> filledMoney = MoneyUtil.filterByCurrency(this.money, amount.getCurrency());
 		List<Valuable> temp = new ArrayList<Valuable>();
-		Collections.sort(filledMoney, comp);
-		Collections.reverse(filledMoney);
+ 		Collections.sort(this.money, comp);
+ 		Collections.reverse(this.money);
 		if (amount.getValue() <= 0)
 			return null;
 		if (amount.getValue() > this.getBalance())
@@ -136,8 +135,8 @@ public class Purse {
 
 		double tempamount = amount.getValue();
 
-		for (Valuable val : filledMoney) {
-			if (tempamount >= val.getValue()) {
+		for (Valuable val : this.money) {
+			if (tempamount >= val.getValue()&& val.getCurrency().equals(amount.getCurrency())) {
 				tempamount -= val.getValue();
 				temp.add(val);
 			}
