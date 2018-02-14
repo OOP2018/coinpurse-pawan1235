@@ -22,7 +22,7 @@ import org.junit.Test;
 public class PurseTest {
 	/** tolerance for comparing two double values */
 	private static final double TOL = 1.0E-6;
-	private static final String CURRENCY = "BTC";
+	private static final String CURRENCY = "Baht";
 
 	/**
 	 * Sets up the test fixture. Called before every test method.
@@ -53,9 +53,9 @@ public class PurseTest {
 		Coin coin1 = makeCoin(5);
 		Coin coin2 = makeCoin(10);
 		Coin coin3 = makeCoin(1);
-		BankNote bank1 = new BankNote(20, "bath");
-		BankNote bank2 = new BankNote(100, "bath");
-		BankNote bank3 = new BankNote(50, "bath");
+		BankNote bank1 = new BankNote(20, "Bath");
+		BankNote bank2 = new BankNote(100, "Bath");
+		BankNote bank3 = new BankNote(50, "Bath");
 
 		assertTrue(purse.insert(bank1));
 		assertTrue(purse.insert(bank2));
@@ -108,8 +108,8 @@ public class PurseTest {
 		double value = 10.0;
 		double bankVal = 20;
 		Purse purse = new Purse(capacity);
-		Coin coin = new Coin(value, "THB");
-		BankNote bank = new BankNote(bankVal, "THB");
+		Coin coin = new Coin(value, "Baht");
+		BankNote bank = new BankNote(bankVal, "Baht");
 		assertTrue(purse.insert(bank));
 		assertTrue(purse.insert(bank));
 		assertTrue(purse.insert(bank));
@@ -141,7 +141,7 @@ public class PurseTest {
 			assertEquals(0, purse.getBalance(), TOL);
 		}
 		for (double value : values) {
-			BankNote bank = new BankNote(value, "THB");
+			BankNote bank = new BankNote(value, "Baht");
 			assertTrue(purse.insert(bank));
 			assertEquals(value, purse.getBalance(), TOL);
 			Valuable[] result = purse.withdraw(value);
@@ -177,8 +177,8 @@ public class PurseTest {
 		assertEquals(0, purse.getBalance(), TOL);
 
 		Purse bankPurse = new Purse(5);
-		BankNote[] banks = { new BankNote(20, "THB"), new BankNote(50, "THB"), new BankNote(100, "THB"),
-				new BankNote(500, "THB"), new BankNote(1000, "THB") };
+		BankNote[] banks = { new BankNote(20, "Baht"), new BankNote(50, "Baht"), new BankNote(100, "Baht"),
+				new BankNote(500, "Baht"), new BankNote(1000, "Baht") };
 		for (BankNote bank : banks)
 			assertTrue(bankPurse.insert(bank));
 
@@ -227,8 +227,8 @@ public class PurseTest {
 		Purse purse2 = new Purse(10);
 		// Banknotes we want to insert and then withdraw.
 		// Use values such that greedy will succeed, but not monotonic
-		List<BankNote> banks = Arrays.asList(new BankNote(20, "THB"), new BankNote(50, "THB"), new BankNote(100, "THB"),
-				new BankNote(500, "THB"), new BankNote(1000, "THB"));
+		List<BankNote> banks = Arrays.asList(new BankNote(20, "Baht"), new BankNote(50, "Baht"), new BankNote(100, "Baht"),
+				new BankNote(500, "Baht"), new BankNote(1000, "Baht"));
 		// num = number of banknotes to insert and then withdraw
 		for (int num = 1; num <= banks.size(); num++) {
 			double amount = 0.0;
@@ -261,7 +261,7 @@ public class PurseTest {
 		assertNull(purse.withdraw(21));
 		purse.insert(makeCoin(20)); // now it has 20 + 20
 		assertNull(purse.withdraw(30));
-		purse.insert(new BankNote(100, "THB"));
+		purse.insert(new BankNote(100, "Baht"));
 		assertNull(purse.withdraw(50));
 		assertNull(purse.withdraw(111));
 		assertNull(purse.withdraw(123));

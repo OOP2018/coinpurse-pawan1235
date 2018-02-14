@@ -1,6 +1,7 @@
 package coinpurse;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -113,7 +114,9 @@ public class Purse {
 	 */
 	public Valuable[] withdraw(double amount) {
 		Valuable a = new Money(amount, "Baht");
-		return withdraw(a);
+		Valuable[] temp = withdraw(a);
+		
+		return temp;
 	}
 	
 	/**
@@ -126,9 +129,9 @@ public class Purse {
 	 */
 	public Valuable[] withdraw(Valuable amount) {
 		List<Valuable> temp = new ArrayList<Valuable>();
- 		Collections.sort(this.money, comp);
- 		Collections.reverse(this.money);
-		if (amount.getValue() <= 0)
+		Collections.sort(this.money, comp);
+		Collections.reverse(this.money);
+		if (amount.getValue() < 0)
 			return null;
 		if (amount.getValue() > this.getBalance())
 			return null;
@@ -136,7 +139,7 @@ public class Purse {
 		double tempamount = amount.getValue();
 
 		for (Valuable val : this.money) {
-			if (tempamount >= val.getValue()&& val.getCurrency().equals(amount.getCurrency())) {
+			if (tempamount >= val.getValue() && val.getCurrency().equals(amount.getCurrency())) {
 				tempamount -= val.getValue();
 				temp.add(val);
 			}
@@ -145,13 +148,12 @@ public class Purse {
 			this.money.remove(val);
 		}
 
-		if (amount.getValue() != 0) {
+		if (tempamount != 0) {
 			return null;
 		}
 		Valuable[] vals = new Valuable[temp.size()];
 		temp.toArray(vals);
 		return vals;
-
 	}
 
 	/**
