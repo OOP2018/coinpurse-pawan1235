@@ -147,7 +147,6 @@ public class Purse {
 		for (Valuable val : temp) {
 			this.money.remove(val);
 		}
-
 		if (tempamount != 0) {
 			return null;
 		}
