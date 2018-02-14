@@ -45,14 +45,13 @@ public class MoneyUtil {
 	}
 	
 	/**
-	 * Print all coin description in List of coin in parameter.
+	 * Print all valuables description in List of valuable in parameter.
 	 * @param vals
-	 * 				is List of coin we want to print
+	 * 				is List of valuable we want to print
 	 */
-	public static void printCoins(List<Valuable> vals) {
+	public static void printVals(List<Valuable> vals) {
 		for (Valuable val : vals) {
 			System.out.println(val.getValue() + "-" + val.getCurrency());
 		}
 	}
-
 }

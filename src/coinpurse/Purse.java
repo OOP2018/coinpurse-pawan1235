@@ -109,41 +109,26 @@ public class Purse {
 	 * 
 	 * @param amount
 	 *            is the amount to withdraw
-	 * @return array of Valuable objects for money withdrawn, or null if cannot
-	 *         withdraw requested amount.
+	 * @return array of Valuable objects for money withdraw
 	 */
 	public Valuable[] withdraw(double amount) {
-		List<Valuable> temp = new ArrayList<Valuable>();
-		Collections.sort(this.money, comp);
-		Collections.reverse(this.money);
-		if (amount < 0)
-			return null;
-		if (amount > this.getBalance())
-			return null;
-
-		for (Valuable val : this.money) {
-			if (amount >= val.getValue()) {
-				amount -= val.getValue();
-				temp.add(val);
-			}
-		}
-		for (Valuable val : temp) {
-			this.money.remove(val);
-		}
-
-		if (amount != 0) {
-			return null;
-		}
-		Valuable[] vals = new Valuable[temp.size()];
-		temp.toArray(vals);
-		return vals;
+		Valuable a = new Money(amount, "Baht");
+		return withdraw(a);
 	}
-
+	
+	/**
+	 * Withdraw the requested amount of money. Return an array of Valuables
+	 * withdrawn from purse, or return null if cannot withdraw the amount requested.
+	 * 
+	 * @param amount
+	 *            is the Valuable to withdraw
+	 * @return array of Valuable objects for money withdraw
+	 */
 	public Valuable[] withdraw(Valuable amount) {
 		List<Valuable> temp = new ArrayList<Valuable>();
 		Collections.sort(this.money, comp);
 		Collections.reverse(this.money);
-		if (amount.getValue() < 0)
+		if (amount.getValue() <= 0)
 			return null;
 		if (amount.getValue() > this.getBalance())
 			return null;
@@ -175,14 +160,5 @@ public class Purse {
 	 */
 	public String toString() {
 		return this.count() + " items with value " + this.getBalance();
-	}
-
-	public static void main(String[] args) {
-		Purse a = new Purse(10);
-		a.insert(new BankNote(20, "b"));
-		a.insert(new BankNote(20, "r"));
-		a.insert(new Coin(10, "b"));
-		a.withdraw(new BankNote(20, "b"));
-		System.out.println(a);
 	}
 }
