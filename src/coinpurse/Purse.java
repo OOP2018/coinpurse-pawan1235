@@ -1,5 +1,7 @@
 package coinpurse;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -128,18 +130,20 @@ public class Purse {
 	 * @return array of Valuable objects for money withdraw
 	 */
 	public Valuable[] withdraw(Valuable amount) {
+		List<Valuable> filedMoney = MoneyUtil.filterByCurrency(this.money, amount.getCurrency());
 		List<Valuable> temp = new ArrayList<Valuable>();
-		Collections.sort(this.money, comp);
-		Collections.reverse(this.money);
+		Collections.sort(filedMoney, comp);
+		Collections.reverse(filedMoney);
 		if (amount.getValue() < 0)
 			return null;
 		if (amount.getValue() > this.getBalance())
 			return null;
 
+		
 		double tempamount = amount.getValue();
 
-		for (Valuable val : this.money) {
-			if (tempamount >= val.getValue() && val.getCurrency().equals(amount.getCurrency())) {
+		for (Valuable val : filedMoney) {
+			if (tempamount >= val.getValue()) {
 				tempamount -= val.getValue();
 				temp.add(val);
 			}

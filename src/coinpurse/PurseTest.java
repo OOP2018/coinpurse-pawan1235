@@ -267,6 +267,7 @@ public class PurseTest {
 		assertNull(purse.withdraw(123));
 
 	}
+	
 
 	/**
 	 * Sum the value of some valuables.
