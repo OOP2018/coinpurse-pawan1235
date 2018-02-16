@@ -13,6 +13,11 @@ public class BankNote extends Money {
 	/** unique serial number of bank note */
 	private long serialNumber;
 
+	public BankNote(double value, String currency) {
+		super(value,currency);
+		this.serialNumber = nextSerialNumber++;
+	}
+	
 	/**
 	 * Create a bank note with value and currency and unique serial number.
 	 * 
@@ -21,10 +26,11 @@ public class BankNote extends Money {
 	 * @param currency
 	 *            is currency of bank note
 	 */
-	public BankNote(double value, String currency) {
+	public BankNote(double value, String currency,long serialNumber) {
 		super(value, currency);
-		this.serialNumber = nextSerialNumber++;
+		this.serialNumber = serialNumber;
 	}
+	
 
 	/**
 	 * Return serial number of bank note
