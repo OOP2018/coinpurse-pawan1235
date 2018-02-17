@@ -51,7 +51,7 @@ public class MoneyUtil {
 	 */
 	public static void printVals(List<Valuable> vals) {
 		for (Valuable val : vals) {
-			System.out.println(val.getValue() + "-" + val.getCurrency());
+			System.out.println(val.toString());
 		}
 	}
 }
