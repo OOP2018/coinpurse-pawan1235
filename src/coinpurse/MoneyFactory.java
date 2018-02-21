@@ -33,7 +33,13 @@ public abstract class MoneyFactory {
 	 * @return Valuable
 	 */
 	public Valuable createMoney(String value) {
-		return createMoney(Double.parseDouble(value));
+		double amount = 0;
+		try {
+			amount = Double.parseDouble(value);
+		}catch (IllegalArgumentException e) {
+			System.out.println("Sorry, " + value + " is not a valid amount.");
+		}
+		return createMoney(amount);
 	}
 	
 	/**
