@@ -20,6 +20,6 @@ public class MalayMoneyFactory extends MoneyFactory {
 		if (value == 1 || value == 2 || value == 5 || value == 10 || value == 20 || value == 50 || value == 100) {
 			return new BankNote(value, "Riggit",nextSerialNumber++);
 		} else
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Sorry, " + value + " is not a valid amount.");
 	}
 }
