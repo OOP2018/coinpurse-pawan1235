@@ -42,14 +42,14 @@ public class MoneyFactoryTest {
 	}
 
 	/**
-	 * test toString of Valuable that create from createMoney method
+	 * test currency of valuable
 	 */
 	@Test(timeout = 1000)
-	public void testValtoString() {
+	public void testValCurrency() {
 		Valuable v1 = mf.createMoney(5);
-		assertEquals("5.0-Baht coin", v1.toString());
+		assertEquals(v1.getCurrency(), "Baht");
 		Valuable v2 = mf.createMoney("20");
-		assertEquals("20.00-Baht note [1000000]", v2.toString());
+		assertEquals(v2.getCurrency(), "Baht");
 	}
 
 	/**
@@ -66,5 +66,28 @@ public class MoneyFactoryTest {
 		assertNotEquals(v2.toString(), v3.toString());
 		assertNotEquals(v3.toString(), v4.toString());
 		assertNotEquals(v2.toString(), v4.toString());
+	}
+	
+	/**
+	 * test create Invalid value
+	 */
+	@Test
+	public void testInvalid() {
+		Valuable v1 = null;
+		Valuable v2 = null;
+		Valuable v3 = null;
+		Valuable v4 = null;
+
+		try {
+			v1 = mf.createMoney(4);
+			v2 = mf.createMoney(21);
+			v3 = mf.createMoney(123);
+			v4 = mf.createMoney(501);
+		} catch (IllegalArgumentException e) {
+			assertTrue(v1 == null);
+			assertTrue(v2 == null);
+			assertTrue(v3 == null);
+			assertTrue(v4 == null);
+		}
 	}
 }
