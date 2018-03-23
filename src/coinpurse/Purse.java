@@ -1,16 +1,14 @@
 package coinpurse;
 
-import static org.junit.Assert.assertTrue;
-
+import coinpurse.strategy.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 /**
- * A coin purse contains valuables. You can insert valuables, withdraw money, check the
- * balance, and check if the purse is full.
+ * A coin purse contains valuables. You can insert valuables, withdraw money,
+ * check the balance, and check if the purse is full.
  * 
  * @author Pawan Intawongsa
  */
@@ -30,6 +28,8 @@ public class Purse {
 	 */
 	private Comparator<Valuable> comp = new ValueComparator();
 
+	private WithdrawStrategy strategy;
+
 	/**
 	 * Create a purse with a specified capacity.
 	 * 
@@ -38,6 +38,7 @@ public class Purse {
 	 */
 	public Purse(int capacity) {
 		this.capacity = capacity;
+		strategy = new GreedyWithdraw();
 	}
 
 	/**
@@ -86,8 +87,8 @@ public class Purse {
 	}
 
 	/**
-	 * Insert a valuable into the purse. The valuable is only inserted if the purse has
-	 * space for it and the coin has positive value. No worthless valuables!
+	 * Insert a valuable into the purse. The valuable is only inserted if the purse
+	 * has space for it and the coin has positive value. No worthless valuables!
 	 * 
 	 * @param val
 	 *            is a Valuable object to insert into purse
@@ -115,12 +116,14 @@ public class Purse {
 	 * @return array of Valuable objects for money withdraw
 	 */
 	public Valuable[] withdraw(double amount) {
+		if (amount < 0 || amount > this.getBalance())
+			return null;
 		Valuable a = new Money(amount, "Baht");
 		Valuable[] temp = withdraw(a);
-		
+
 		return temp;
 	}
-	
+
 	/**
 	 * Withdraw the requested amount of money. Return an array of Valuables
 	 * withdrawn from purse, or return null if cannot withdraw the amount requested.
@@ -130,33 +133,20 @@ public class Purse {
 	 * @return array of Valuable objects for money withdraw
 	 */
 	public Valuable[] withdraw(Valuable amount) {
-		List<Valuable> filedMoney = MoneyUtil.filterByCurrency(this.money, amount.getCurrency());
-		List<Valuable> temp = new ArrayList<Valuable>();
-		Collections.sort(filedMoney, comp);
-		Collections.reverse(filedMoney);
-		if (amount.getValue() < 0)
-			return null;
-		if (amount.getValue() > this.getBalance())
+		if (amount.getValue() < 0 || amount.getValue() > this.getBalance())
 			return null;
 
-		
-		double tempamount = amount.getValue();
+		List<Valuable> temp = strategy.withdraw(amount, this.money);
 
-		for (Valuable val : filedMoney) {
-			if (tempamount >= val.getValue()) {
-				tempamount -= val.getValue();
-				temp.add(val);
+		if (temp != null) {
+			for (Valuable val : temp) {
+				this.money.remove(val);
 			}
+			Valuable[] vals = new Valuable[temp.size()];
+			temp.toArray(vals);
+			return vals;
 		}
-		for (Valuable val : temp) {
-			this.money.remove(val);
-		}
-		if (tempamount != 0) {
-			return null;
-		}
-		Valuable[] vals = new Valuable[temp.size()];
-		temp.toArray(vals);
-		return vals;
+		return null;
 	}
 
 	/**
