@@ -5,9 +5,16 @@ import java.util.List;
 
 import coinpurse.Money;
 import coinpurse.Valuable;
-
+/**
+ * A strategy for withdraw with a recursive algorithm
+ * @author Pawan Intawongsa
+ *
+ */
 public class RecursiveWithdraw implements WithdrawStrategy {
 
+	/**
+	 * A method for recursive algorithm
+	 */
 	@Override
 	public List<Valuable> withdraw(Valuable amount, List<Valuable> money) {
 		if (amount.getValue() == 0) {

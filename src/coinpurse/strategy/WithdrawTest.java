@@ -37,9 +37,9 @@ public class WithdrawTest {
 
 	@Test
 	public void testWithdrawImpossible() {
-		moneys = Arrays.asList(new Coin(5, CURRENCY),new Coin(1, CURRENCY));
-		assertNull(strategy.withdraw(new Money(3, CURRENCY),moneys));
-		assertNull(strategy.withdraw(new Money(7, CURRENCY),moneys));
+		moneys = Arrays.asList(new Coin(5, CURRENCY), new Coin(1, CURRENCY));
+		assertNull(strategy.withdraw(new Money(3, CURRENCY), moneys));
+		assertNull(strategy.withdraw(new Money(7, CURRENCY), moneys));
 		assertNull(strategy.withdraw(new BankNote(10, CURRENCY), moneys));
 	}
 
@@ -59,14 +59,36 @@ public class WithdrawTest {
 
 	@Test
 	public void testWithdrawOnlyRecursive() {
-		moneys = Arrays.asList(new Coin(5, CURRENCY), new Coin(2, CURRENCY), new Coin(2, CURRENCY), new Coin(2, CURRENCY));
-//		GreedyWithdraw gWithdraw = new GreedyWithdraw();
-		//Should be null 
+		moneys = Arrays.asList(new Coin(5, CURRENCY), new Coin(2, CURRENCY), new Coin(2, CURRENCY),
+				new Coin(2, CURRENCY));
+		GreedyWithdraw gWithdraw = new GreedyWithdraw();
+		// Should be null
+		assertNull(gWithdraw.withdraw(new Money(6, CURRENCY), moneys));
+		// For Recursive withdraw should not null
 		assertNotNull(strategy.withdraw(new Money(6, CURRENCY), moneys));
-		
-//		assertEquals(new Money(6, CURRENCY), strategy.withdraw(new Money(6, CURRENCY), moneys).get(0));
-		
+
+	}
+
+	@Test
+	public void testWithdrawFromEmpty() {
+		// should return not thing
+		assertNull(strategy.withdraw(new Money(50, CURRENCY), moneys));
+		assertNull(strategy.withdraw(new Money(40, CURRENCY), moneys));
+		assertNull(strategy.withdraw(new Money(30, CURRENCY), moneys));
+		assertNull(strategy.withdraw(new Money(200, CURRENCY), moneys));
+		moneys = Arrays.asList(new Coin(5, CURRENCY), new Coin(2, CURRENCY), new Coin(2, CURRENCY),
+				new Coin(2, CURRENCY));
+		assertNotNull(strategy.withdraw(new Money(6, CURRENCY), moneys));
+
 	}
 	
-	
+	@Test
+	public void testWithdrawDifferentCurreny() {
+		moneys = Arrays.asList(new Coin(5, CURRENCY), new Coin(2, CURRENCY), new Coin(2, "Ringgit"),
+				new Coin(2, "Riggit"));
+		assertNotEquals(new Money(5, CURRENCY), strategy.withdraw(new Money(5, CURRENCY), moneys));
+		assertNotEquals(new Money(2, "Ringgit"), strategy.withdraw(new Money(2, "Ringgit"), moneys));
+		assertNotEquals(new Money(2, "Baht"), strategy.withdraw(new Money(2, "Ringgit"), moneys));
+	}
+
 }

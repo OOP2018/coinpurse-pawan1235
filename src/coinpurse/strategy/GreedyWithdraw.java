@@ -8,9 +8,16 @@ import java.util.List;
 import coinpurse.MoneyUtil;
 import coinpurse.Valuable;
 import coinpurse.ValueComparator;
-
+/**
+ * A strategy for withdraw with a Greedy Algorithm
+ * @author Pawan Intawongsa
+ *
+ */
 public class GreedyWithdraw implements WithdrawStrategy {
 
+	/**
+	 * Withdraw method with greedy algorithm
+	 */
 	 @Override
 	public List<Valuable> withdraw(Valuable amount, List<Valuable> money) {
 		money = MoneyUtil.filterByCurrency(money, amount.getCurrency());
